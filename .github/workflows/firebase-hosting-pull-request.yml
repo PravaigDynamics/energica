@@ -13,6 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Create .env file
+        run: |
+          cat << EOF > .env
+          VITE_FIREBASE_API_KEY=AIzaSyCaqW8-mdPLbLLcLSITczUYZIwPSXLquYM
+          VITE_FIREBASE_AUTH_DOMAIN=energica-admin.firebaseapp.com
+          VITE_FIREBASE_PROJECT_ID=energica-admin
+          VITE_FIREBASE_STORAGE_BUCKET=energica-admin.firebasestorage.app
+          VITE_FIREBASE_MESSAGING_SENDER_ID=140963133320
+          VITE_FIREBASE_APP_ID=1:140963133320:web:95988e29471cc600ca6c3d
+          VITE_FIREBASE_MEASUREMENT_ID=G-ZQJ0V1VHDG
+          VITE_APP_ENV=production
+          VITE_USE_FIREBASE_EMULATORS=false
+          EOF
       - run: rm -rf package-lock.json node_modules && npm install && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
