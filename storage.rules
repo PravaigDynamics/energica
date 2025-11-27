@@ -1,0 +1,51 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper function to check file size (max 5MB for images)
+    function isValidSize(maxSize) {
+      return request.resource.size <= maxSize;
+    }
+
+    // Helper function to check if file is an image
+    function isImage() {
+      return request.resource.contentType.matches('image/.*');
+    }
+
+    // User profile images
+    match /users/{userId}/profile/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() &&
+                      request.auth.uid == userId &&
+                      isImage() &&
+                      isValidSize(5 * 1024 * 1024); // 5MB
+    }
+
+    // Bike images
+    match /garage/{userId}/{bikeId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() &&
+                      request.auth.uid == userId &&
+                      isImage() &&
+                      isValidSize(5 * 1024 * 1024); // 5MB
+    }
+
+    // Service records attachments
+    match /service/{userId}/{recordId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() &&
+                      request.auth.uid == userId &&
+                      isValidSize(10 * 1024 * 1024); // 10MB for documents
+    }
+
+    // Default deny
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
