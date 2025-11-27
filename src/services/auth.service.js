@@ -91,7 +91,9 @@ class AuthService {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (userDoc.exists()) {
           console.log('✅ User document found:', userDoc.data());
-          if (!userDoc.data().isActive) {
+          const userData = userDoc.data();
+          // Only check isActive if the field exists and is explicitly false
+          if (userData.isActive === false) {
             await signOut(auth);
             toast.error('Your account has been deactivated.');
             return { success: false, error: 'Account deactivated' };
