@@ -2,7 +2,40 @@
 
 A complete, production-ready single-page React application for Energica motorcycle owners.
 
-## 🚀 Quick Start
+---
+
+## 🎯 For Non-Technical Users - The Easy Way!
+
+**You don't need to know coding to run this website!** Just follow these simple steps:
+
+### Step 1: Install Node.js (One-time setup)
+1. Visit [https://nodejs.org](https://nodejs.org)
+2. Download the **LTS version** (the green button)
+3. Run the installer and click "Next" through all the steps
+4. That's it! You now have Node.js installed.
+
+### Step 2: Run the Website (Super Easy - Automatic!)
+
+**On Windows:**
+1. Just **double-click** the `START_ENERGICA.bat` file
+2. That's it! The website will automatically install everything needed and open in your browser
+3. Wait about 30-60 seconds for the setup to complete
+
+The BAT file does all the work for you - no typing commands needed!
+
+**What's happening behind the scenes:**
+- First time: Downloads all required files (takes 1-2 minutes)
+- Every time: Starts the website server
+- Automatically opens your browser to [http://localhost:5173](http://localhost:5173)
+
+### Troubleshooting
+- If nothing happens, make sure you completed Step 1 (Node.js installation)
+- If you see errors, try restarting your computer and double-clicking the BAT file again
+- Still stuck? Contact your tech support team
+
+---
+
+## 🚀 Quick Start (For Developers)
 
 ### Prerequisites
 - Node.js 16+ installed
